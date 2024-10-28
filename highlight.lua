@@ -45,7 +45,10 @@ dwRunService.Heartbeat:Connect(function()
                                         chams_box.AlwaysOnTop = true 
                                         chams_box.ZIndex = 4 
                                         chams_box.Adornee = part 
-                                        chams_box.Color3 = settings_tbl.Chams_Color
+                                        
+                                        local teamColor = player.Team and player.Team.TeamColor.Color or settings_tbl.Chams_Color
+                                        chams_box.Color3 = teamColor
+                                        
                                         chams_box.Transparency = settings_tbl.Chams_Transparency
                                         chams_box.Size = part.Size + Vector3.new(0.02, 0.02, 0.02)
 
