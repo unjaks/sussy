@@ -31,7 +31,7 @@ function Highlight.CreateGui(Transparency)
 	HighlightFrame.ImageTransparency = Transparency or 0.5
 end
 
-function Highlight.HighlightPart(Part, Color)
+function Highlight:HighlightPart(Part, Color)
 	local Color = Color or Color3.new(1, 1, 1)
 
 	if typeof(Color) == "BrickColor" then
@@ -91,7 +91,7 @@ function Highlight.HighlightPart(Part, Color)
 	return Clone
 end
 
-function Highlight.HighlightBody(BodyModel, Color, AllowClothing)
+function Highlight:HighlightBody(BodyModel, Color, AllowClothing)
 	local Color = Color or Color3.new(1, 1, 1)
 	local AllowClothing = AllowClothing or false
 
@@ -141,7 +141,7 @@ function Highlight.HighlightBody(BodyModel, Color, AllowClothing)
 	return HumanoidModel
 end
 
-function Highlight.HighlightModel(BodyModel,Color)
+function Highlight:HighlightModel(BodyModel,Color)
 	local Color = Color or Color3.new(1, 1, 1)
 
 	if typeof(Color) == "BrickColor" then
@@ -176,11 +176,11 @@ function Highlight.HighlightModel(BodyModel,Color)
 	return NewModel
 end
 
-function Highlight.GetGuiObjects()
+function Highlight:GetGuiObjects()
 	return HighlightFrame, HighlightGui
 end
 
-function Highlight.RemoveHighlightGuis()
+function Highlight:RemoveHighlightGuis()
 	for _, v in pairs(CoreGui:GetChildren()) do
 		if v.Name == "HighlightGui" and v:IsA("ScreenGui") and v:FindFirstChild("HighlightFrame") then
 			v:Destroy()
