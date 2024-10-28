@@ -13,12 +13,6 @@ local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
 
-StarterGui:SetCore("SendNotification", {
-    Title = "Hewwo sir!";
-    Text = ">.<";
-    Duration = 2;
-})
-
 local FOVring = Drawing.new("Circle")
 FOVring.Visible = true
 FOVring.Thickness = 1
