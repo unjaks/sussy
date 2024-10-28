@@ -44,15 +44,7 @@ dwRunService.Heartbeat:Connect(function()
                                         chams_box.Name = "Chams"
                                         chams_box.AlwaysOnTop = true 
                                         chams_box.ZIndex = 4 
-                                        chams_box.Adornee = part 
-
-                                        while chams_box do 
-                                            task.wait(.1)
-                                            
-                                            local teamColor = player.Team and player.Team.TeamColor.Color or settings_tbl.Chams_Color
-                                            chams_box.Color3 = teamColor
-                                        end
-                                        
+                                        chams_box.Adornee = part
                                         chams_box.Transparency = settings_tbl.Chams_Transparency
                                         chams_box.Size = part.Size + Vector3.new(0.02, 0.02, 0.02)
 
@@ -63,6 +55,14 @@ dwRunService.Heartbeat:Connect(function()
                                         glow_box.Adornee = part 
                                         glow_box.Color3 = settings_tbl.Chams_Glow_Color
                                         glow_box.Size = chams_box.Size + Vector3.new(0.13, 0.13, 0.13)
+
+                                        
+                                        while chams_box do 
+                                            task.wait(.1)
+                                            
+                                            local teamColor = player.Team and player.Team.TeamColor.Color or settings_tbl.Chams_Color
+                                            chams_box.Color3 = teamColor
+                                        end
                                     end
                                 else
                                     destroy_chams(char)
