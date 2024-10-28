@@ -53,7 +53,7 @@ dwRunService.Heartbeat:Connect(function()
                                         local glow_box = Instance.new("BoxHandleAdornment", part)
                                         glow_box.Name = "Glow"
                                         glow_box.AlwaysOnTop = false 
-                                        glow_box.ZIndex = -1 
+                                        glow_box.ZIndex = 3 
                                         glow_box.Adornee = part 
                                         glow_box.Color3 = settings_tbl.Chams_Glow_Color
                                         glow_box.Size = chams_box.Size + Vector3.new(0.13, 0.13, 0.13)
