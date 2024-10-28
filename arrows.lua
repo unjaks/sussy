@@ -106,4 +106,14 @@ local function ShowArrow(PLAYER)
     CWRAP(Update)()
 end
 
-return ShowArrow()
+for _,v in pairs(Players:GetChildren()) do
+	if v.Name ~= Player.Name then
+		ShowArrow(v)
+	end
+end
+	
+Players.PlayerAdded:Connect(function(v)
+	if v.Name ~= Player.Name then
+		ShowArrow(v)
+	end
+end)
