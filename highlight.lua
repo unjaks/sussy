@@ -46,6 +46,8 @@ dwRunService.Heartbeat:Connect(function()
                                         chams_box.ZIndex = 4 
                                         chams_box.Adornee = part
                                         chams_box.Transparency = settings_tbl.Chams_Transparency
+                                        local teamColor = player.Team and player.Team.TeamColor.Color or settings_tbl.Chams_Color
+                                        chams_box.Color3 = teamColor
                                         chams_box.Size = part.Size + Vector3.new(0.02, 0.02, 0.02)
 
                                         local glow_box = Instance.new("BoxHandleAdornment", part)
@@ -56,12 +58,13 @@ dwRunService.Heartbeat:Connect(function()
                                         glow_box.Color3 = settings_tbl.Chams_Glow_Color
                                         glow_box.Size = chams_box.Size + Vector3.new(0.13, 0.13, 0.13)
 
-                                        
-                                        while chams_box do 
-                                            task.wait(.1)
-                                            
-                                            local teamColor = player.Team and player.Team.TeamColor.Color or settings_tbl.Chams_Color
-                                            chams_box.Color3 = teamColor
+                                        if player.Team then
+                                            player.Team.Changed:Connect(function()
+                                                if player.Team then
+                                                    local newTeamColor = player.Team.TeamColor.Color
+                                                    chams_box.Color3 = newTeamColor
+                                                end
+                                            end)
                                         end
                                     end
                                 else
