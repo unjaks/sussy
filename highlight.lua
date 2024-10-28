@@ -1,191 +1,126 @@
+local dwEntities = game:GetService("Players")
+local dwLocalPlayer = dwEntities.LocalPlayer 
+local dwRunService = game:GetService("RunService")
 
-local Highlight = {}
+local settings_tbl = {
+    ESP_Enabled = true,
+    ESP_TeamCheck = false,
+    Chams = true,
+    Chams_Color = Color3.fromRGB(255,255,255),
+    Chams_Transparency = 0,
+    Chams_Glow_Color = Color3.fromRGB(255,0,0)
+}
 
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local Workspace = game:GetService("Workspace")
-local Lighting = game:GetService("Lighting")
-local CoreGui = game:GetService("CoreGui")
+function destroy_chams(char)
 
-local LocalPlayer = Players.LocalPlayer
+    for k,v in next, char:GetChildren() do 
 
-local HighlightGui, HighlightFrame
-function Highlight.CreateGui(Transparency)
-	HighlightGui = Instance.new("ScreenGui", CoreGui)
-	HighlightFrame = Instance.new("ViewportFrame", HighlightGui)
+        if v:IsA("BasePart") and v.Transparency ~= 1 then
 
-	HighlightGui.IgnoreGuiInset = true
-	HighlightGui.Name = "HighlightGui"
-	HighlightGui.Enabled = true
-	HighlightGui.ResetOnSpawn = false
+            if v:FindFirstChild("Glow") and 
+            v:FindFirstChild("Chams") then
 
-	HighlightFrame.Name = "HighlightFrame"
-	HighlightFrame.Ambient = Color3.new(1, 1, 1)
-	HighlightFrame.LightColor = Color3.fromRGB(255, 255, 255)
-	HighlightFrame.Size = UDim2.fromScale(1, 1)
-	HighlightFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	HighlightFrame.Position = UDim2.fromScale(0.5, 0.5)
-	HighlightFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	HighlightFrame.BackgroundTransparency = 1
-	HighlightFrame.CurrentCamera = Workspace.CurrentCamera
-	HighlightFrame.ImageTransparency = Transparency or 0.5
+                v.Glow:Destroy()
+                v.Chams:Destroy() 
+
+            end 
+
+        end 
+
+    end 
+
 end
 
-function Highlight.HighlightPart(Part, Color)
-	local Color = Color or Color3.new(1, 1, 1)
+dwRunService.Heartbeat:Connect(function()
 
-	if typeof(Color) == "BrickColor" then
-		Color = Color.Color
-	end
+    if settings_tbl.ESP_Enabled then
 
-	local Clone = Part:Clone()
-	Clone.Parent = HighlightFrame
-	Clone.Transparency = 0
-	Clone.Material = Enum.Material.Neon
-	Clone.Color = Color
+        for k,v in next, dwEntities:GetPlayers() do 
 
-	if Clone:IsA("MeshPart") then
-		Clone.TextureID = ""
-	end
+            if v ~= dwLocalPlayer then
 
-	RunService.RenderStepped:Connect(function()
-		Clone.CFrame = Part.CFrame
-	end)
+                if v.Character and
+                v.Character:FindFirstChild("HumanoidRootPart") and 
+                v.Character:FindFirstChild("Humanoid") and 
+                v.Character:FindFirstChild("Humanoid").Health ~= 0 then
 
-	for _, v in pairs(Part:GetDescendants()) do
-		if v:IsA("LuaSourceContainer") then
-			v:Destroy()
-		end
-	end
+                    if settings_tbl.ESP_TeamCheck == false then
 
-	Part.Changed:Connect(function(Property)
-		pcall(function()
-			if Property ~= "BrickColor" and Property ~= "Color" then
-				if Property ~= "Transparency" and Property ~= "Material" then
-					Clone[Property] = Part[Property]
-				end
-			end
-		end)
-	end)
+                        local char = v.Character 
 
-	Part.AncestryChanged:Connect(function(Child,Parent)
-		if not Parent and Child ~= Part then
-			Clone:Destroy()
-		end
-	end)
+                        for k,b in next, char:GetChildren() do 
 
-	Part.Changed:Connect(function(Property)
-		if Property == "Parent" and Part.Parent == nil then
-			Clone:Destroy()
-		end
-	end)
+                            if b:IsA("BasePart") and 
+                            b.Transparency ~= 1 then
+                                
+                                if settings_tbl.Chams then
 
-	for _, v in pairs(Clone:GetChildren()) do
-		if v:IsA("SpecialMesh") then
-			v.TextureId= ""
-		elseif v:IsA("Texture") or v:IsA("Decal") then
-			v:Destroy()
-		end
-	end
+                                    if not b:FindFirstChild("Glow") and
+                                    not b:FindFirstChild("Chams") then
 
-	return Clone
-end
+                                        local chams_box = Instance.new("BoxHandleAdornment", b)
+                                        chams_box.Name = "Chams"
+                                        chams_box.AlwaysOnTop = true 
+                                        chams_box.ZIndex = 4 
+                                        chams_box.Adornee = b 
+                                        chams_box.Color3 = settings_tbl.Chams_Color
+                                        chams_box.Transparency = settings_tbl.Chams_Transparency
+                                        chams_box.Size = b.Size + Vector3.new(0.02, 0.02, 0.02)
 
-function Highlight.HighlightBody(BodyModel, Color, AllowClothing)
-	local Color = Color or Color3.new(1, 1, 1)
-	local AllowClothing = AllowClothing or false
+                                        local glow_box = Instance.new("BoxHandleAdornment", b)
+                                        glow_box.Name = "Glow"
+                                        glow_box.AlwaysOnTop = false 
+                                        glow_box.ZIndex = 3 
+                                        glow_box.Adornee = b 
+                                        glow_box.Color3 = settings_tbl.Chams_Glow_Color
+                                        glow_box.Size = chams_box.Size + Vector3.new(0.13, 0.13, 0.13)
 
-	if typeof(Color) == "BrickColor" then
-		Color = Color.Color
-	end
+                                    end
 
-	local HumanoidModel = Instance.new("Model", HighlightFrame)
+                                else
 
-	local Humanoid = Instance.new("Humanoid", HumanoidModel)
-	Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+                                    destroy_chams(char)
 
-	local Parts = {}
+                                end
+                            
+                            end
 
-	for _, v in pairs(BodyModel:GetChildren()) do
-		if v:IsA("BasePart") then
-			if v.Name ~= "HumanoidRootPart" then
-				local Part = Highlight.HighlightPart(v, Color)
-				Part.Parent = HumanoidModel
-				table.insert(Parts, Part)
-			end
-		end
-	end
+                        end
 
-	for _, v in pairs(BodyModel:GetDescendants()) do
-		if v:IsA("BasePart") and v.Parent ~= BodyModel then
-			local Part = Highlight.HighlightPart(v, Color)
-			Part.Parent = HumanoidModel
-			table.insert(Parts, Part)
-		elseif v:IsA("CharacterMesh") then
-			local Clone = v:Clone()
-			Clone:ClearAllChildren()
-			Clone.Parent = HumanoidModel
-		elseif v:IsA("BodyColors") or v:IsA("Shirt") or v:IsA("ShirtGraphic") or v:IsA("Pants") then
-			if AllowClothing then
-				local Clone = v:Clone()
-				Clone:ClearAllChildren()
-				Clone.Parent = HumanoidModel
-			end
-		end
-	end
+                    else
 
-	for _, v in pairs(Parts) do
-		v.Color = Color
-	end
+                        if v.Team == dwLocalPlayer.Team then
+                            destroy_chams(v.Character)
+                        end
 
-	return HumanoidModel
-end
+                    end
 
-function Highlight.HighlightModel(BodyModel,Color)
-	local Color = Color or Color3.new(1, 1, 1)
+                else
 
-	if typeof(Color) == "BrickColor" then
-		Color = Color.Color
-	end
+                    destroy_chams(v.Character)
 
-	local NewModel = Instance.new("Model", HighlightFrame)
-	local Parts = {}
+                end
 
-	for _, v in pairs(BodyModel:GetChildren()) do
-		if v:IsA("BasePart") then
-			if v.Name ~= "HumanoidRootPart" then
-				local Part = Highlight.HighlightPart(v, Color)
-				Part.Parent = NewModel
-				table.insert(Parts, Part)
-			end
-		end
-	end
+            end
 
-	for _,v in pairs(BodyModel:GetDescendants()) do
-		if v:IsA("BasePart") and v.Parent ~= BodyModel then
-			local Part = Highlight.HighlightPart(v, Color)
-			Part.Parent = NewModel
-			table.insert(Parts, Part)
-		end
-	end
+        end
 
-	for _, v in pairs(Parts) do
-		v.Color = Color
-	end
+    else 
 
-	return NewModel
-end
+        for k,v in next, dwEntities:GetPlayers() do 
 
-function Highlight.GetGuiObjects()
-	return HighlightFrame, HighlightGui
-end
+            if v ~= dwLocalPlayer and 
+            v.Character and 
+            v.Character:FindFirstChild("HumanoidRootPart") and 
+            v.Character:FindFirstChild("Humanoid") and 
+            v.Character:FindFirstChild("Humanoid").Health ~= 0 then
+                
+                destroy_chams(v.Character)
 
-function Highlight.RemoveHighlightGuis()
-	for _, v in pairs(CoreGui:GetChildren()) do
-		if v.Name == "HighlightGui" and v:IsA("ScreenGui") and v:FindFirstChild("HighlightFrame") then
-			v:Destroy()
-		end
-	end
-end
+            end
 
-return Highlight
+        end
+
+    end
+
+end)
