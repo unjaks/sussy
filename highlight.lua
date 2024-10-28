@@ -109,7 +109,7 @@ function Highlight:HighlightBody(BodyModel, Color, AllowClothing)
 	for _, v in pairs(BodyModel:GetChildren()) do
 		if v:IsA("BasePart") then
 			if v.Name ~= "HumanoidRootPart" then
-				local Part = Highlight.HighlightPart(v, Color)
+				local Part = Highlight:HighlightPart(v, Color)
 				Part.Parent = HumanoidModel
 				table.insert(Parts, Part)
 			end
@@ -118,7 +118,7 @@ function Highlight:HighlightBody(BodyModel, Color, AllowClothing)
 
 	for _, v in pairs(BodyModel:GetDescendants()) do
 		if v:IsA("BasePart") and v.Parent ~= BodyModel then
-			local Part = Highlight.HighlightPart(v, Color)
+			local Part = Highlight:HighlightPart(v, Color)
 			Part.Parent = HumanoidModel
 			table.insert(Parts, Part)
 		elseif v:IsA("CharacterMesh") then
@@ -154,7 +154,7 @@ function Highlight:HighlightModel(BodyModel,Color)
 	for _, v in pairs(BodyModel:GetChildren()) do
 		if v:IsA("BasePart") then
 			if v.Name ~= "HumanoidRootPart" then
-				local Part = Highlight.HighlightPart(v, Color)
+				local Part = Highlight:HighlightPart(v, Color)
 				Part.Parent = NewModel
 				table.insert(Parts, Part)
 			end
@@ -163,7 +163,7 @@ function Highlight:HighlightModel(BodyModel,Color)
 
 	for _,v in pairs(BodyModel:GetDescendants()) do
 		if v:IsA("BasePart") and v.Parent ~= BodyModel then
-			local Part = Highlight.HighlightPart(v, Color)
+			local Part = Highlight:HighlightPart(v, Color)
 			Part.Parent = NewModel
 			table.insert(Parts, Part)
 		end
