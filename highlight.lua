@@ -8,7 +8,7 @@ local settings_tbl = {
     Chams = true,
     Chams_Color = Color3.fromRGB(0, 0, 0),
     Chams_Transparency = 0.5,
-    Chams_Glow_Color = Color3.fromRGB(255, 255, 255)
+    Chams_Glow_Color = Color3.fromRGB(255, 255, 255),
     Chams_Glow_Transparency = 0.5
 }
 
