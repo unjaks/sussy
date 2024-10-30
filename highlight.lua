@@ -7,8 +7,9 @@ local settings_tbl = {
     ESP_TeamCheck = false,
     Chams = true,
     Chams_Color = Color3.fromRGB(0, 0, 0),
-    Chams_Transparency = 0,
+    Chams_Transparency = 0.5,
     Chams_Glow_Color = Color3.fromRGB(255, 255, 255)
+    Chams_Glow_Transparency = 0.5
 }
 
 function destroy_chams(char)
@@ -54,7 +55,8 @@ dwRunService.Heartbeat:Connect(function()
                                         glow_box.Name = "Glow"
                                         glow_box.AlwaysOnTop = false 
                                         glow_box.ZIndex = 3 
-                                        glow_box.Adornee = part 
+                                        glow_box.Adornee = part
+                                        glow_box.Transparency = settings_tbl.Chams_Glow_Transparency
                                         glow_box.Color3 = settings_tbl.Chams_Glow_Color
                                         glow_box.Size = chams_box.Size + Vector3.new(0.13, 0.13, 0.13)
 
