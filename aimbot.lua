@@ -14,7 +14,7 @@ local StarterGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
 
 local FOVring = Drawing.new("Circle")
-FOVring.Visible = true
+FOVring.Visible = false
 FOVring.Thickness = 1
 FOVring.Radius = fov
 FOVring.Transparency = 0.8
