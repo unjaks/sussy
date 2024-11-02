@@ -1,4 +1,4 @@
-local teamCheck = false
+local teamCheck = true
 local fov = 40
 local smoothing = 0.09
 local predictionFactor = 0.1  -- Adjust this factor to improve prediction accuracy
