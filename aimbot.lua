@@ -3,7 +3,7 @@ local fov = 40
 local smoothing = 0.09
 local predictionFactor = 0.1  -- Adjust this factor to improve prediction accuracy
 local highlightEnabled = true  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
-local lockPart = "Head"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
+local lockPart = "HumanoidRootPart"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
 
 local Toggle = false  -- Enable or disable toggle mode
 local ToggleKey = Enum.KeyCode.E  -- Choose the key for toggling aimbot lock
