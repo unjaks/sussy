@@ -75,7 +75,7 @@ local function predictPosition(target)
     if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
         local velocity = target.Character.HumanoidRootPart.Velocity
         local position = target.Character[lockPart].Position
-        local predictedPosition = (position + Vector3.new(0,1,0) + (velocity * predictionFactor)
+        local predictedPosition = position + (velocity * predictionFactor)
         return predictedPosition
     end
     return nil
