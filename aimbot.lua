@@ -114,7 +114,7 @@ loop = RunService.RenderStepped:Connect(function()
             if currentTarget and currentTarget.Character and currentTarget.Character:FindFirstChild(lockPart) then
                 local predictedPosition = predictPosition(currentTarget)
                 if predictedPosition then
-                    workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame:Lerp(CFrame.new(cam.CFrame.Position, predictedPosition), smoothing)
+                    workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame:Lerp(CFrame.new(cam.CFrame.Position, predictedPosition + Vector3.new(0,1,0), smoothing)
                 end
                 FOVring.Color = Color3.fromRGB(0, 255, 0)  -- Change FOV ring color to green when locked onto a target
             else
