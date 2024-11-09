@@ -75,7 +75,7 @@ local function predictPosition(target)
     if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
         local velocity = target.Character.HumanoidRootPart.Velocity
         local position = target.Character[lockPart].Position
-        local predictedPosition = position + (velocity * predictionFactor)
+        local predictedPosition = (position + Vector3.new(0,1,0) + (velocity * predictionFactor)
         return predictedPosition
     end
     return nil
@@ -114,7 +114,7 @@ loop = RunService.RenderStepped:Connect(function()
             if currentTarget and currentTarget.Character and currentTarget.Character:FindFirstChild(lockPart) then
                 local predictedPosition = predictPosition(currentTarget)
                 if predictedPosition then
-                    workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame:Lerp(CFrame.new(cam.CFrame.Position, predictedPosition, smoothing)
+                    workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame:Lerp(CFrame.new(cam.CFrame.Position, predictedPosition), smoothing)
                 end
                 FOVring.Color = Color3.fromRGB(0, 255, 0)  -- Change FOV ring color to green when locked onto a target
             else
