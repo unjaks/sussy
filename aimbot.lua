@@ -3,7 +3,7 @@ local fov = 40
 local smoothing = 0.09
 local predictionFactor = 0.1  -- Adjust this factor to improve prediction accuracy
 local highlightEnabled = true  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
-local lockPart = "Torso"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
+local lockPart = "Head"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
 
 local Toggle = false  -- Enable or disable toggle mode
 local ToggleKey = Enum.KeyCode.E  -- Choose the key for toggling aimbot lock
@@ -75,7 +75,7 @@ local function predictPosition(target)
     if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
         local velocity = target.Character.HumanoidRootPart.Velocity
         local position = target.Character[lockPart].Position
-        local predictedPosition = (position + Vector3.new(0,1,0)) + (velocity * predictionFactor)
+        local predictedPosition = position + (velocity * predictionFactor)
         return predictedPosition
     end
     return nil
