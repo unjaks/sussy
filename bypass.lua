@@ -253,7 +253,7 @@ end)
 local TweenService = game:GetService("TweenService")
 local frame = GazerMain
 frame.Visible = true
-frame.Size = UDim2.new(0.4, 0, 0.4, 0) 
+frame.Size = UDim2.new(0.2, 0, 0.2, 0) 
 frame.Position = UDim2.new(0.5, 0, 0.7, 0) 
 frame.AnchorPoint = Vector2.new(0.5, 0.5)
 frame.BackgroundTransparency = 1 
