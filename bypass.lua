@@ -258,7 +258,7 @@ frame.Position = UDim2.new(0.5, 0, 0.7, 0)
 frame.AnchorPoint = Vector2.new(0.5, 0.5)
 frame.BackgroundTransparency = 1 
 local targetPosition = UDim2.new(0.5, 0, 0.5, 0) 
-local targetSize = UDim2.new(0.5, 0, 0.5, 0) 
+local targetSize = UDim2.new(0.2, 0, 0.2, 0) 
 local targetTransparency = 0 
 local tweenInfo = TweenInfo.new(
 1, -- Duration (in seconds)
@@ -284,7 +284,7 @@ local Delta = input.Position - dragStart
 local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X,
 startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
 
-TS:Create(Frame, TweenInfo.new(0.3), {Position = Position}):Play()
+TS:Create(Frame, TweenInfo.new(0.1), {Position = Position}):Play()
 
 end
 
