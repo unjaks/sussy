@@ -1,8 +1,4 @@
---[[
-	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
-]]
-
-local yapping = true
+local yapping = false
 
 local Gaze = [[
 Gaze Bypass Tutorial:
@@ -203,14 +199,13 @@ end
 
 local gui = Instance.new("ScreenGui")
 local GazerMain = Instance.new("Frame")
-local GazerTitle = Instance.new("TextLabel")
 local TextBax = Instance.new("TextBox")
 local chat = Instance.new("TextButton")
 
 
 gui.Name = "GazerGui"
 gui.Parent = coreGay
-GazerMain.Size = UDim2.new(0.5, 0, 0.5, 0)
+GazerMain.Size = UDim2.new(0.2, 0, 0.2, 0)
 GazerMain.Position = UDim2.new(0.25, 0, 0.25, 0)
 GazerMain.BackgroundColor3 = Color3.new(1, 1, 1)
 GazerMain.BorderColor3 = Color3.new(0, 0, 0)
@@ -218,16 +213,6 @@ GazerMain.BorderSizePixel = 1
 GazerMain.Active = true
 
 GazerMain.Parent = gui
-GazerTitle.Size = UDim2.new(1, 0, 0.2, 0)
-GazerTitle.Position = UDim2.new(0, 0, 0, 0)
-GazerTitle.BackgroundColor3 = Color3.new(0, 0, 0)
-GazerTitle.BorderColor3 = Color3.new(0, 0, 0)
-GazerTitle.BorderSizePixel = 1
-GazerTitle.Text = "Gaze Bypass (Tutorial needed)"
-GazerTitle.TextSize = 14
-GazerTitle.TextColor3 = Color3.new(1, 1, 1)
-GazerTitle.Font = Enum.Font.Bodoni
-GazerTitle.Parent = GazerMain
 TextBax.Size = UDim2.new(0.8, 0, 0.2, 0)
 TextBax.Position = UDim2.new(0.1, 0, 0.3, 0)
 TextBax.BackgroundColor3 = Color3.new(0, 0, 0)
