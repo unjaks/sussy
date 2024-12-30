@@ -205,7 +205,7 @@ local chat = Instance.new("TextButton")
 
 gui.Name = "GazerGui"
 gui.Parent = coreGay
-GazerMain.Size = UDim2.new(0.2, 0, 0.2, 0)
+GazerMain.Size = UDim2.new(0.1, 0, 0.1, 0)
 GazerMain.Position = UDim2.new(0.25, 0, 0.25, 0)
 GazerMain.BackgroundColor3 = Color3.new(1, 1, 1)
 GazerMain.BorderColor3 = Color3.new(0, 0, 0)
